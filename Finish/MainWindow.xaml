@@ -1,0 +1,160 @@
+﻿<Window x:Class="Finish.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Finish"
+        mc:Ignorable="d"
+Title="Calculator" Height="600" Width="450" Background="white" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="65" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="backgroundElement" BorderThickness="1" Background="{TemplateBinding Background}" 
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Border.RenderTransform>
+                            </Border>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                          TextElement.FontWeight="{TemplateBinding FontWeight}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}"
+                                          TextElement.FontSize="{TemplateBinding FontSize}"
+                                          TextElement.FontFamily="{TemplateBinding FontFamily}">
+                            </ContentPresenter>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard Storyboard.TargetName="backgroundElement" FillBehavior="Stop">
+                                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetProperty="RenderTransform.ScaleX" 
+                                                             To="1.1" AutoReverse="True"/>
+                                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetProperty="RenderTransform.ScaleY" 
+                                                             To="1.1" AutoReverse="True"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button" x:Key="numberButton">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button" x:Key="operateButton">
+            <Setter Property="Background" Value="LightSlateGray"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="DarkSlateGray" 
+                Grid.Row="0" Grid.ColumnSpan="5" 
+                BorderThickness="3" Margin="10">
+            <TextBox x:Name="textBox" 
+                 VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" 
+                 Padding="5"
+                 FontSize="40" FontFamily="Tahoma" FontWeight="SemiBold"
+                 Background="DarkGray"/>
+        </Border>
+        <Button Name="ButtonDivide"
+                Grid.Row="1" Grid.Column="3"
+                Style="{StaticResource operateButton}"
+                Content="/"/>
+        <Button Name="ButtonMultiply"
+                Grid.Row="2" Grid.Column="3"
+                Style="{StaticResource operateButton}"
+                Content="*"/>
+        <Button Name="ButtonMinus" 
+                Grid.Row="3" Grid.Column="3"
+                Style="{StaticResource operateButton}"
+                Content="-"/>
+        <Button Name="ButtonPlus"
+                Grid.Row="4" Grid.Column="3"
+                Style="{StaticResource operateButton}"
+                Content="+"/>
+        <Button Name="ButtonPoint"
+                Grid.Row="4" Grid.Column="0"
+                Style="{StaticResource operateButton}"
+                Content="."/>
+        <Button Name="ButtonBack"
+                Grid.Row="4" Grid.Column="2"
+                Style="{StaticResource operateButton}"
+                Content="R"/>
+        <Button Name="Button7" 
+                Grid.Row="1" Grid.Column="0"
+                Style="{StaticResource numberButton}"
+                Content="7"/>
+        <Button Name="Button8"
+                Grid.Row="1" Grid.Column="1"
+                Style="{StaticResource numberButton}"
+                Content="8"/>
+        <Button Name="Button9"
+                Grid.Row="1" Grid.Column="2"
+                Style="{StaticResource numberButton}"
+                Content="9"/>
+        <Button Name="Button4"
+                Grid.Row="2" Grid.Column="0"
+                Style="{StaticResource numberButton}"
+                Content="4"/>
+        <Button Name="Button5" 
+                Grid.Row="2" Grid.Column="1"
+                Style="{StaticResource numberButton}"
+                Content="5"/>
+        <Button Name="Button6"
+                Grid.Row="2" Grid.Column="2"
+                Style="{StaticResource numberButton}"
+                Content="6"/>
+        <Button Name="Button1"
+                Grid.Row="3" Grid.Column="0"
+                Style="{StaticResource numberButton}"
+                Content="1"/>
+        <Button Name="Button2"
+                Grid.Row="3" Grid.Column="1"
+                Style="{StaticResource numberButton}"
+                Content="2"/>
+        <Button Name="Button3"
+                Grid.Row="3" Grid.Column="2"
+                Style="{StaticResource numberButton}"
+                Content="3"/>
+        <Button Name="ButtonClean" 
+                Grid.Row="1" Grid.Column="4"
+                Grid.RowSpan="2"
+                Content="C"
+                Background="Orange"/>
+        <Button Name="Button0"
+                Grid.Row="4" Grid.Column="1"
+                Style="{StaticResource numberButton}"
+                Content="0"/>
+        <Button Name="ButtonResult" 
+                Grid.Row="3" Grid.Column="4"
+                Grid.RowSpan="2"
+                Content="="
+                Background="Orange" />
+    </Grid>
+</Window>
